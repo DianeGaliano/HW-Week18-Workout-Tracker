@@ -24,5 +24,23 @@ router.post('/api/workout', ({body}, res) => {
 
 // update workout
 router.put('/api/workout/:id', (req, res) => {
-    Workout.findOneAndUpdate
-})
+    const id = req.params.id;
+    const body = req.body;
+    Workout.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $push: {
+                exercise: body
+            }
+        },
+        {
+            new: true
+        }
+    )
+    .then((data) => {
+        res.status(400).json(err);
+
+    });
+});
