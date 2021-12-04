@@ -7,7 +7,7 @@ router.get('/api/workouts', (req, res) => {
     .then((dbWorkout) => {
         dbWorkout.forEach((workout) => {
             var total = 0;
-            workout.exercise.forEach((e) => {
+            workout.exercises.forEach((e) => {
                 total += e.duration;
             });
             workout.totalDuration = total;
@@ -52,7 +52,7 @@ router.put('/api/workouts/:id', (req, res) => {
     .then((dbWorkout) => {
         res.json(dbWorkout);
     })
-    .catch((err) => {
+    .catch(err => {
         res.status(400).json(err);
 
     });
@@ -61,12 +61,12 @@ router.put('/api/workouts/:id', (req, res) => {
 // get workouts in range
 router.get('/api/workouts/range', (req, res) => {
     db.Workout.find({})
-    .then((data) => {
+    .then((dbWorkout) => {
         consol.log("WORKOUTS");
         consol.log(dbWorkout);
         res.json(dbWorkout);
     })
-    .catch((err) => {
+    .catch(err => {
         res.status(400).json(err);
 
     });
