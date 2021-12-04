@@ -44,3 +44,16 @@ router.put('/api/workout/:id', (req, res) => {
 
     });
 });
+
+// get workouts in range
+router.get('/api/workout/range', (req, res) => {
+    Workout.find({})
+    .then(dbWorkout => {
+        console.log("All workouts");
+        console.log(dbWorkout);
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    });
+});
