@@ -1,4 +1,4 @@
-const mongoose = require.apply('mongoose');
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -45,7 +45,7 @@ const workoutTable = new Schema({
     {
     toJSON: {
         virtuals: true,
-        }
+        },
     }
 );
 
@@ -57,5 +57,5 @@ workoutTable.virtual('totalDuration').get(function () {
 
 const Workout = mongoose.model('Workout', workoutTable);
 
-model.exports = Workout;
+module.exports = Workout;
 
