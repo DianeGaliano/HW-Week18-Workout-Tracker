@@ -23,8 +23,8 @@ mongoose.connect(
 });
 
 
-require("./routes/apiRoutes")(app);
-require('./routes/homeRoutes')(app);
+app.use(require('./routes/api'));
+app.use(require('./routes/html'));
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
