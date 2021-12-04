@@ -1,10 +1,17 @@
-const db = require('../models/workout');
+const db = require('../models/Workout');
 const router = require("express").Router();
 
 
 router.get('/api/workouts', (req, res) => {
     db.Workout.find({})
     .then((dbWorkout) => {
+        dbWorkout.forEach((workouts) => {
+            var total = 0;
+            workout.exercise.forEach((e) => {
+                total += e.duration;
+            });
+            workout.totalDuration = total;
+        });
         res.json(dbWorkout);
     })
     .catch(err => {
@@ -32,14 +39,19 @@ router.put('/api/workouts/:id', (req, res) => {
         {
             $push: {
                 exercise: body
-            }
+            },
+            $inc: { 
+                totalDuration: req.body.duration 
+            },
         },
         {
             new: true,
            
         }
     )
-    .then((data) => res.json(data))
+    .then((dbWorkout) => {
+        res.json(dbWorkout);
+    })
     .catch((err) => {
         res.status(400).json(err);
 
